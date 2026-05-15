@@ -16,14 +16,13 @@ class _LoginScreenState extends State<LoginScreen> {
     String password = _passwordController.text.trim();
 
     if (username.isEmpty || password.isEmpty) {
-      Get.snackbar('Error', 'Username and Password cannot be empty',
+      Get.snackbar('Error', 'Username dan Password tidak boleh kosong',
           snackPosition: SnackPosition.BOTTOM);
       return;
     }
 
-    // Password must be NIM (Numeric). In this exercise, we just ensure it's numeric and not empty.
-    if (!RegExp(r'^[0-9]+$').hasMatch(password)) {
-       Get.snackbar('Error', 'Password wajib berupa NIM (angka)',
+    if (username != 'admin' || password != '123230169') {
+       Get.snackbar('Error', 'Username atau Password salah',
            snackPosition: SnackPosition.BOTTOM);
        return;
     }
@@ -43,6 +42,23 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Container(
+              padding: EdgeInsets.all(12),
+              margin: EdgeInsets.only(bottom: 24),
+              decoration: BoxDecoration(
+                color: Colors.blue.shade50,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.blue.shade200),
+              ),
+              child: Column(
+                children: [
+                  Text('Info Login:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue.shade900)),
+                  SizedBox(height: 4),
+                  Text('Username: admin', style: TextStyle(color: Colors.blue.shade900)),
+                  Text('Password: 123230169', style: TextStyle(color: Colors.blue.shade900)),
+                ],
+              ),
+            ),
             TextField(
               controller: _usernameController,
               decoration: InputDecoration(
