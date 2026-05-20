@@ -10,8 +10,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   await Hive.initFlutter();
-  Hive.registerAdapter(CartItemAdapter());
-  await Hive.openBox<CartItem>('cartBox');
+  Hive.registerAdapter(FavoriteAnimeAdapter());
+  await Hive.openBox<FavoriteAnime>('favoriteBox');
   
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? username = prefs.getString('username');
@@ -26,9 +26,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Latihan Responsi',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      title: 'Keripikroll',
+      theme: ThemeData.dark().copyWith(
+        primaryColor: Colors.orange.shade800,
+        scaffoldBackgroundColor: const Color(0xFF121212),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF1E1E1E),
+          elevation: 0,
+        ),
+        colorScheme: ColorScheme.dark(
+          primary: Colors.orange.shade800,
+          secondary: Colors.orangeAccent,
+        ),
       ),
       initialRoute: initialRoute,
       getPages: [
