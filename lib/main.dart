@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'models/cart_item.dart';
+import 'models/cart_item.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_wrapper.dart';
 
