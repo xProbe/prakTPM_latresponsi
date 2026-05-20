@@ -4,7 +4,7 @@ class CartItem {
   final int id;
   final String title;
   final double price;
-  final int quantity;
+  int quantity;
   final String user;
   final String thumbnail;
 

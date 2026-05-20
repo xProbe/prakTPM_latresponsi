@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   subtitle: Text('\$${product['price']}'),
                   trailing: Icon(Icons.chevron_right),
                   onTap: () {
-                    Get.to(() => ProductDetailScreen(product: product, username: _username));
+                    Get.to(() => ProductDetailScreen(productId: product['id'], username: _username));
                   },
                 ),
               );

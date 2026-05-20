@@ -15,36 +15,55 @@ class _LoginScreenState extends State<LoginScreen> {
     String username = _usernameController.text.trim();
     String password = _passwordController.text.trim();
 
+    // 1. Validasi: Input tidak boleh ada yang kosong
     if (username.isEmpty || password.isEmpty) {
-      Get.snackbar('Error', 'Username dan Password tidak boleh kosong',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Login Gagal', 
+        'Username dan Password tidak boleh kosong',
+        backgroundColor: Colors.redAccent,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+      );
       return;
     }
 
-    if (username != 'admin' || password != '123230169') {
-       Get.snackbar('Error', 'Username atau Password salah',
-           snackPosition: SnackPosition.BOTTOM);
-       return;
+    // 2. Validasi NIM (Password): 
+    // ==========================================
+    // ⚠️ ATUR NIM KAMU DI SINI SAAT UJIAN!
+    // ==========================================
+    const String targetNIM = '123230169'; // Ganti dengan NIM asli kamu saat responsi
+
+    if (password != targetNIM) {
+      Get.snackbar(
+        'Login Gagal', 
+        'Password salah (Harus berupa NIM Anda)',
+        backgroundColor: Colors.redAccent,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
     }
 
+    // 3. Simpan session username menggunakan SharedPreferences
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('username', username);
 
+    // 4. Masuk ke halaman utama (Home) dan bersihkan halaman login dari memory
     Get.offAllNamed('/home');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(title: const Text('Login Toko Online')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsets.all(12),
-              margin: EdgeInsets.only(bottom: 24),
+              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.only(bottom: 24),
               decoration: BoxDecoration(
                 color: Colors.blue.shade50,
                 borderRadius: BorderRadius.circular(8),
@@ -52,10 +71,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               child: Column(
                 children: [
-                  Text('Info Login:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue.shade900)),
-                  SizedBox(height: 4),
-                  Text('Username: admin', style: TextStyle(color: Colors.blue.shade900)),
-                  Text('Password: 123230169', style: TextStyle(color: Colors.blue.shade900)),
+                  Text(
+                    'Petunjuk Login Responsi:', 
+                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue.shade900),
+                  ),
+                  const SizedBox(height: 4),
+                  Text('Username: Bebas dimasukkan apa saja', style: TextStyle(color: Colors.blue.shade900)),
+                  Text('Password: Wajib isi dengan NIM kamu (123230169)', style: TextStyle(color: Colors.blue.shade900)),
                 ],
               ),
             ),
