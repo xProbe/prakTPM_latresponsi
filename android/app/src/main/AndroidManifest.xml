@@ -1,11 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Permisi Lokasi untuk LBS (Bonus) -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    
-    <!-- Permisi Notifikasi untuk Android 13+ (Bonus) -->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
     <application
         android:label="latihan_reponsi"
         android:name="${applicationName}"

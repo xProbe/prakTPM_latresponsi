@@ -2,25 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
-import 'models/favorite_anime.dart';
-import 'services/notification_service.dart';
+import 'models/cart_item.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Inisialisasi Hive untuk penyimpanan lokal favorit
   await Hive.initFlutter();
-  Hive.registerAdapter(FavoriteAnimeAdapter());
-  await Hive.openBox<FavoriteAnime>('favoriteBox');
-  
-  // Inisialisasi Notifikasi Lokal (Bonus Nilai)
-  try {
-    await NotificationService.init();
-  } catch (e) {
-    print("Gagal menginisialisasi NotificationService: $e");
-  }
+  Hive.registerAdapter(CartItemAdapter());
+  await Hive.openBox<CartItem>('cartBox');
   
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? username = prefs.getString('username');
